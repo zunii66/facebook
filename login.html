@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Meri Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+
+        .fb-login-btn {
+            background-color: #1877f2;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .fb-login-btn:hover {
+            background-color: #166fe5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.4);
+        }
+
+        .fb-icon {
+            font-size: 1.5rem;
+        }
+
+        .back-btn {
+            background-color: #95a5a6;
+            color: white;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .manual-login-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .manual-login-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .manual-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+        }
+
+        .manual-input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 5px rgba(24, 119, 242, 0.3);
+        }
+
+        .manual-login-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .manual-login-btn:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+        }
+
+        .success-msg {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-msg {
+            background-color: #ffe5e5;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>🔐 Login Karen</h1>
+        <p class="subtitle">Apni Facebook account se login karen</p>
+
+        <div class="success-msg" id="successMsg">✅ Login successful! Ek lamha intezar karen...</div>
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="info-box">
+            ℹ️ Neeche button dab kar Facebook.com par jaain aur apna account se login karen. Login karne ke baad wapas aan.
+        </div>
+
+        <!-- Facebook Login Button -->
+        <button class="fb-login-btn" onclick="openFacebookLogin()">
+            <span class="fb-icon">f</span>
+            Facebook Browser Mein Kholen
+        </button>
+
+        <!-- Manual Login Section -->
+        <div class="manual-login-section">
+            <h3>Ya Phir Yahan Direct Login Karen</h3>
+            
+            <input 
+                type="text" 
+                id="userName" 
+                class="manual-input" 
+                placeholder="Aapka Naam likhin"
+            >
+            
+            <input 
+                type="email" 
+                id="userEmail" 
+                class="manual-input" 
+                placeholder="Email address"
+            >
+            
+            <input 
+                type="text" 
+                id="userId" 
+                class="manual-input" 
+                placeholder="Facebook Profile ID (optional)"
+            >
+            
+            <input 
+                type="text" 
+                id="profilePic" 
+                class="manual-input" 
+                placeholder="Profile Picture URL (optional)"
+            >
+            
+            <button class="manual-login-btn" onclick="manualLogin()">
+                ✓ Login Karen
+            </button>
+        </div>
+
+        <button class="back-btn" onclick="goBack()" style="margin-top: 30px;">
+            ← Wapas Jain
+        </button>
+    </div>
+
+    <script>
+        // Facebook login ke liye browser mein khol de
+        function openFacebookLogin() {
+            // Facebook.com khol de
+            const facebookUrl = 'https://www.facebook.com/';
+            
+            // Naya tab/window mein khol de
+            const fbWindow = window.open(facebookUrl, 'FacebookLogin', 'width=800,height=600');
+            
+            // Check karain ke window open hua ya nahi
+            if (!fbWindow) {
+                showError('Pop-up blocker enabled hai. Pehle pop-ups allow karen.');
+                return;
+            }
+
+            // Har 1 second baad check karain ke window close ho gaya ya nahi
+            const checkWindow = setInterval(function() {
+                if (fbWindow.closed) {
+                    clearInterval(checkWindow);
+                    // Window close ho gaya to ye dialog dikha de
+                    promptLoginConfirmation();
+                }
+            }, 1000);
+        }
+
+        // Jab Facebook window close ho to confirmation maangen
+        function promptLoginConfirmation() {
+            const response = confirm('Kya aap Facebook se successfully login ho gaye hain? "OK" dab den agar login ho gaye.');
+            
+            if (response) {
+                // Agar user OK de de to session save kar de
+                saveLoginSession();
+            } else {
+                showError('Login nahi hua. Dobara koshish karen.');
+            }
+        }
+
+        // Manual login
+        function manualLogin() {
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const userId = document.getElementById('userId').value.trim() || 'FB' + Math.random().toString(36).substr(2, 9);
+            const profilePic = document.getElementById('profilePic').value.trim() || 'https://via.placeholder.com/150';
+
+            // Validation
+            if (!name || !email) {
+                showError('Naam aur email zaroori hain!');
+                return;
+            }
+
+            // Email validation
+            if (!isValidEmail(email)) {
+                showError('Sahi email likhin!');
+                return;
+            }
+
+            // Save karo
+            const userData = {
+                id: userId,
+                name: name,
+                email: email,
+                profilePicture: profilePic,
+                loginTime: new Date().toISOString(),
+                loginMethod: 'manual',
+                isLoggedIn: true
+            };
+
+            localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            showSuccess('Login successful! Redirect ho raha hai...');
+            
+            setTimeout(function() {
+                window.location.href = 'loggedsessionpage.html';
+            }, 2000);
+        }
+
+        // Facebook se login ka session save karo
+        function saveLoginSession() {
+            // Dummy Facebook user data (aap real data plug-in kar sakte ho)
+            const userData = {
+                id: 'FB' + Math.random().toString(36).substr(2, 9),
+                name: 'Facebook User',
+                email: 'user@facebook.com',
+                profilePicture: 'https://via.placeholder.com/150?text=FB+User',
+                loginTime: new Date().toISOString(),
+                loginMethod: 'facebook',
+                isLoggedIn: true
+            };
+
+            localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            showSuccess('Login successful! Redirect ho raha hai...');
+            
+            setTimeout(function() {
+                window.location.href = 'loggedsessionpage.html';
+            }, 2000);
+        }
+
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Error message dikhaao
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+        }
+
+        // Success message dikhaao
+        function showSuccess(message) {
+            const successMsg = document.getElementById('successMsg');
+            successMsg.textContent = message;
+            successMsg.style.display = 'block';
+        }
+
+        // Wapas jao
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Page load par check karo
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('userLoggedIn') === 'true') {
+                window.location.href = 'loggedsessionpage.html';
+            }
+        });
+    </script>
+</body>
+</html>
